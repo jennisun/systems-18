@@ -32,8 +32,8 @@ int main() {
     char line[1000];
     while(fgets(line, 1000, stdin)) {
       line[strlen(line) - 1] = '\0';
-      write(parent[WRITE], line, strlen(line));
-      sleep(2);
+      write(parent[WRITE], line, sizeof(stdin));
+      sleep(3);
     }
   }
   return 0;
