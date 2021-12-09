@@ -19,18 +19,22 @@ int main() {
 
   if (f) {
     //parent
+    close(child[READ]);
     close(parent[WRITE]);
 
-    while(fgets(line, 1000, stdin)) {
+    while(1) {
+      printf("Enter input: ");
+      fgets(line, 1000, stdin);
       line[strlen(line) - 1] = '\0';
       write(child[WRITE], line, sizeof(stdin));
-      sleep(3);
+      // sleep(3);
       read(parent[READ], line, sizeof(stdin));
-      printf("parent got: [%s]\n", line);
+      printf("Parent got: [%s]\n", line);
     }
   }
   else {
     //child
+    close(child[WRITE]);
     close(parent[READ]);
 
     while (read(child[READ], line, sizeof(line))) {
